@@ -6,6 +6,7 @@ import { useEffect, useRef, useState } from "react";
 
 import meteor1 from '../images/asteroid-1-no-bg.png';
 import meteor2 from '../images/asteroid-2-no-bg.png';
+import PageTitle from "../ui/PageTitle";
 
 export default function MeteorData() {
   const [meteorData, setMeteorData] = useState<any | null>([]);
@@ -59,7 +60,7 @@ export default function MeteorData() {
       
 
       <div className="flex flex-col items-center data-display">
-        <h2 className="text-xl mb-10 border-spacing-5 border-2 p-5">Meteor Data</h2>
+        <PageTitle title="Meteor Data" />
 
         {isLoading ? <div>Loading data...</div>
          : meteorData.map((meteor: any, index: number) => {

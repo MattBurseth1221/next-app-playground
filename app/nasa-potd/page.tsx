@@ -1,11 +1,8 @@
 "use client";
 
-import MeteorInfo from "../ui/MeteorInfo";
+import PageTitle from "../ui/PageTitle";
 import MainNav from "../ui/MainNav";
 import { useEffect, useRef, useState } from "react";
-
-import meteor1 from '../images/asteroid-1-no-bg.png';
-import meteor2 from '../images/asteroid-2-no-bg.png';
 
 export default function NasaPotd() {
   const [photoInfo, setPhotoInfo] = useState<any | null>({});
@@ -38,7 +35,7 @@ export default function NasaPotd() {
       
 
       <div className="flex flex-col items-center data-display">
-        <h2 className="text-xl mb-10 border-spacing-5 border-2 p-5">NASA's Photo of the Day</h2>
+        <PageTitle title="NASA's Photo of the Day" />
 
         {isLoading ? <code>Loading data...</code>
          : <div className="flex flex-col items-center p-5 text-center">

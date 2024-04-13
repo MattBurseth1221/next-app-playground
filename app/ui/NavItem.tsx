@@ -8,5 +8,5 @@ type Props = {
 };
 
 export default function NavItem({ itemName, linkRedirect, active }: Props) {
-  return <li className={`mb-5 border-y-2 border-x-2 border-white text-center hover:bg-slate-300 cursor-pointer py-2 ${active ? "bg-slate-400" : ""}`}><a href={linkRedirect}>{itemName}</a></li>;
+  return <li className={`mb-5 text-center hover:bg-slate-600 cursor-pointer py-2 rounded-2xl ${active ? "bg-slate-200 text-black" : ""}`}><a href={linkRedirect}>{itemName}</a></li>;
 }
