@@ -7,7 +7,7 @@ export default function Home() {
   return (
     <>
       <img src={orionEarthImage.src} alt="Orion and Earth Image" className="absolute"/>
-      <main className="flex min-h-screen flex-col items-center p-24">
+      <main className="flex min-h-screen flex-col items-center p-0">
         <MainNav active={""} />
 
         <PageTitle title="SpaceXploration"/>
