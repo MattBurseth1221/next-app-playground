@@ -3,6 +3,7 @@
 import PageTitle from "../ui/PageTitle";
 import MainNav from "../ui/MainNav";
 import { useEffect, useRef, useState } from "react";
+import YoutubeEmbed from "../ui/YoutubeEmbed";
 
 export default function NasaPotd() {
   const [photoInfo, setPhotoInfo] = useState<any | null>({});
@@ -39,8 +40,9 @@ export default function NasaPotd() {
 
         {isLoading ? <code>Loading data...</code>
          : <div className="flex flex-col items-center p-5 text-center">
-            <img src={photoInfo.hdurl} alt="Nasa Photo" className="w-[50vw] border-2 mb-5"/>
-            <h1 className="mb-5">'{photoInfo.title}' - {photoInfo.date}</h1>
+            {photoInfo.media_type === "video" ? <YoutubeEmbed embedId={photoInfo.url} />
+            : <img src={photoInfo.hdurl} alt="Nasa Photo" className="w-[50vw] border-2 mb-5"/>}
+            <h1 className="my-5">'{photoInfo.title}' - {photoInfo.date}</h1>
             <p className="w-1/2">{photoInfo.explanation}</p>
           </div>}
       </div>
