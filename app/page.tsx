@@ -10,7 +10,7 @@ export default function Home() {
       <main className="flex min-h-screen flex-col items-center p-0">
         <MainNav active={""} />
 
-        <PageTitle title="SpaceXploration"/>
+        <PageTitle title="Space Stuff"/>
       </main>
     </>
   );
