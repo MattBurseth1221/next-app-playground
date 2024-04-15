@@ -16,31 +16,33 @@ export default function MarsRover() {
   const [photoCount, setPhotoCount] = useState(1);
   const [generatedPhotos, setGeneratedPhotos] = useState<Array<PhotoItem>>([]);
 
-  const activeTab = useRef("AI Images");
-
   useEffect(() => {
     setGeneratedPhotos(getPreviousPhotos());
-  }, []);
+  }, [generatedPhoto]);
 
   function getPreviousPhotos(): Array<PhotoItem> {
-    let count = 1;
     let photoList = [];
+    let count = 1;
 
-    while (localStorage.getItem(`dall-e-3-photo-${count}`)) {
-      let photoJson = JSON.parse(
-        localStorage.getItem(`dall-e-3-photo-${count}`)!
-      );
+    for (let i = 0; i < sessionStorage.length; i++) {
+      let key = sessionStorage.key(i);
 
-      photoList.push({
-        prompt: photoJson.prompt,
-        photoURL: photoJson.photo_url,
-      });
+      if (key!.includes("dall-e-3-photo-")) {
+        let photoJson = JSON.parse(
+          sessionStorage.getItem(key!)!
+        );
 
-      count++;
+        photoList.push({
+          prompt: photoJson.prompt,
+          photoURL: photoJson.photo_url,
+        });
+
+        count++;
+      }
     }
 
-    console.log(photoList);
     setPhotoCount(count);
+    console.log(photoList);
     return photoList.reverse();
   }
 
@@ -66,7 +68,7 @@ export default function MarsRover() {
     }
 
     setGeneratedPhoto(response.data[0].url);
-    localStorage.setItem(
+    sessionStorage.setItem(
       `dall-e-3-photo-${photoCount}`,
       JSON.stringify({
         prompt: inputValue,
@@ -74,16 +76,22 @@ export default function MarsRover() {
         revised_prompt: response.data[0].revised_prompt,
       })
     );
+    setInterval(() => {
+      sessionStorage.remove(`dall-e-3-photo-${photoCount}`);
+    }, 60 * 60 * 1000);
 
     setInputValue("");
-    setGeneratedPhotos([...generatedPhotos, {prompt: inputValue, photoURL: response.data[0].url}]);
+    setGeneratedPhotos([
+      ...generatedPhotos,
+      { prompt: inputValue, photoURL: response.data[0].url },
+    ]);
     setPhotoCount(photoCount + 1);
     setIsLoading(false);
   }
 
   return (
-    <main className="flex min-h-screen flex-col items-center justify-between p-24 relative">
-      <MainNav active={activeTab.current} />
+    <main className="flex min-h-screen flex-col items-center justify-between p-12 relative">
+      <MainNav active="AI Images" />
 
       <PageTitle title="DALL-E Image Generation" />
 
@@ -109,14 +117,18 @@ export default function MarsRover() {
         <div className="flex flex-col items-center">
           {generatedPhotos.map((photo, index) => {
             return (
-            <div key={index} className="flex flex-col items-center m-12 border-white border-2 w-[50%] text-center">
-            <img
-              src={photo.photoURL}
-              alt="Generated photo"
-              className="object-contain border-b-2 border-white"
-            />
-            <h1 className="p-6">{photo.prompt}"</h1>
-          </div>)
+              <div
+                key={index}
+                className="flex flex-col items-center m-12 border-white border-2 w-[50%] text-center rounded-md"
+              >
+                <img
+                  src={photo.photoURL}
+                  alt="Generated photo"
+                  className="object-contain border-b-2 border-white"
+                />
+                <h1 className="p-6">"{photo.prompt}"</h1>
+              </div>
+            );
           })}
         </div>
       )}

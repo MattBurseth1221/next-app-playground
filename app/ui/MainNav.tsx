@@ -10,7 +10,7 @@ type Props = {
 export default function MainNav({active}: Props) {
   return (
     <>
-      <nav className="w-40 min-h-screen absolute left-0 px-5 border-r-white-200 border-opacity-50 mt-12">
+      <nav className="w-40 min-h-screen absolute left-0 px-5 border-r-white-200 border-opacity-50">
         <ul>
           <NavItem linkRedirect="/" itemName="Home" active={active === "Home"} />
           <NavItem linkRedirect="/meteor-data" itemName="Meteor Data" active={active === "Meteor Data"}/>

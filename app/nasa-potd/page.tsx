@@ -8,9 +8,15 @@ import YoutubeEmbed from "../ui/YoutubeEmbed";
 export default function NasaPotd() {
   const [photoInfo, setPhotoInfo] = useState<any | null>({});
   const [isLoading, setIsLoading] = useState<Boolean>(false);
-  const activeTab = useRef("NASA POTD")
 
   useEffect(() => {
+    if (sessionStorage.getItem('potd-data')) {
+      let photoData = JSON.parse(sessionStorage.getItem('potd-data')!);
+      setPhotoInfo(photoData);
+
+      return;
+    }
+
     async function getPhoto() {
       setIsLoading(true);
 
@@ -20,6 +26,8 @@ export default function NasaPotd() {
         .then((res) => res.json())
         .catch((e) => console.log(e));
 
+      sessionStorage.setItem('potd-data', JSON.stringify(response));
+
       setPhotoInfo(response);
       setIsLoading(false);
     }
@@ -28,8 +36,8 @@ export default function NasaPotd() {
   }, []);
 
   return (
-    <main className="flex min-h-screen flex-col items-center justify-between p-24 relative">
-      <MainNav active={activeTab.current}/>
+    <main className="flex min-h-screen flex-col items-center justify-between p-12 relative">
+      <MainNav active="NASA POTD"/>
 
       {/* <img src={meteor1.src} className=" absolute top-[3%] right-24 rotate-12 w-225 h-225" alt="Meteor Image"/>
       <img src={meteor2.src} className="min-w-75 min-h-75 absolute top-[9%] left-48 rotate-90 object-fill" alt="Meteor Image"/> */}

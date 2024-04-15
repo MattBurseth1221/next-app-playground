@@ -12,7 +12,6 @@ export default function MeteorData() {
   const [meteorData, setMeteorData] = useState<any | null>([]);
   const [isLoading, setIsLoading] = useState<Boolean>(false);
   const [heaviest, setHeaviest] = useState<number>(0);
-  const activeTab = useRef("Meteor Data")
 
   useEffect(() => {
     async function getMeteorData() {
@@ -57,8 +56,8 @@ export default function MeteorData() {
   }, [meteorData])
 
   return (
-    <main className="flex min-h-screen flex-col items-center justify-between p-24 relative">
-      <MainNav active={activeTab.current}/>
+    <main className="flex min-h-screen flex-col items-center justify-between p-12 relative">
+      <MainNav active="Meteor Data"/>
 
       <img src={meteor1.src} className=" absolute top-[3%] right-24 rotate-12 w-225 h-225" alt="Meteor Image"/>
       <img src={meteor2.src} className="min-w-75 min-h-75 absolute top-[9%] left-48 rotate-90 object-fill" alt="Meteor Image"/>
