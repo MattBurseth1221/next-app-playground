@@ -8,10 +8,6 @@ type Props = {
 }
 
 export default function MainNav({active}: Props) {
-  useEffect(() => {
-    console.log(active);
-  })
-
   return (
     <>
       <nav className="w-40 min-h-screen absolute left-0 px-5 border-r-white-200 border-opacity-50 mt-12">
