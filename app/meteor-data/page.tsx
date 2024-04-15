@@ -18,13 +18,18 @@ export default function MeteorData() {
     async function getMeteorData() {
       setIsLoading(true);
 
+      if (localStorage.getItem('meteor-data')) {
+        console.log(JSON.parse(localStorage.getItem('meteor-data')!));
+        return;
+      }
+
       const response = await fetch(
         "https://data.nasa.gov/api/views/gh4g-9sfh/rows.json"
       )
         .then((res) => res.json())
         .then((res) => res.data)
         .catch((e) => console.log(e));
-
+      
       setMeteorData(response.slice(0, 100));
       setIsLoading(false);
     }
