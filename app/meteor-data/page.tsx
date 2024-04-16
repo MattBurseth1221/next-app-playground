@@ -25,12 +25,23 @@ export default function MeteorData() {
       const response = await fetch(
         "https://data.nasa.gov/api/views/gh4g-9sfh/rows.json"
       )
-        .then((res) => res.json())
-        .then((res) => res.data)
-        .catch((e) => console.log(e));
+        .then((res) => {
+          if (res.ok) {
+            return res.json();
+          }
+
+          throw new Error('Server error.');
+        })
+        .then((resJson) => resJson.data)
+        .catch(error => Promise.reject());
       
-      setMeteorData(response.slice(0, 100));
-      setIsLoading(false);
+        try {
+          setMeteorData(response.slice(0, 100));
+          setIsLoading(false);
+        } catch (e) {
+          setMeteorData([]);
+          console.log(e);
+        }
     }
 
     getMeteorData();
@@ -67,7 +78,7 @@ export default function MeteorData() {
         <PageTitle title="Meteor Data" />
 
         {isLoading ? <div>Loading data...</div>
-         : meteorData.map((meteor: any, index: number) => {
+         : meteorData.length !== 0 ? meteorData.map((meteor: any, index: number) => {
           return (
             <MeteorInfo key={index}>
               <>
@@ -75,8 +86,9 @@ export default function MeteorData() {
                 <p>{meteor[12]} grams</p>
               </>
             </MeteorInfo>
-          );
-        })}
+          )
+         }) : <div>No data found.</div>
+        }
       </div>
 
       <div className="text-xl mt-10">

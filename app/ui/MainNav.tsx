@@ -9,7 +9,6 @@ type Props = {
 
 export default function MainNav({active}: Props) {
   return (
-    <>
       <nav className="w-40 min-h-screen absolute left-0 px-5 border-r-white-200 border-opacity-50">
         <ul>
           <NavItem linkRedirect="/" itemName="Home" active={active === "Home"} />
@@ -19,6 +18,5 @@ export default function MainNav({active}: Props) {
           <NavItem linkRedirect="/ai-images" itemName="AI Images" active={active === "AI Images"} />
         </ul>
       </nav>
-    </>
   );
 }

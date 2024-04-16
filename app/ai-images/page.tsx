@@ -10,10 +10,10 @@ type PhotoItem = {
 };
 
 export default function MarsRover() {
-  const [generatedPhoto, setGeneratedPhoto] = useState("");
-  const [inputValue, setInputValue] = useState("");
+  const [generatedPhoto, setGeneratedPhoto] = useState<string>("");
+  const [inputValue, setInputValue] = useState<string>("");
   const [isLoading, setIsLoading] = useState<Boolean>(false);
-  const [photoCount, setPhotoCount] = useState(1);
+  const [photoCount, setPhotoCount] = useState<number>(1);
   const [generatedPhotos, setGeneratedPhotos] = useState<Array<PhotoItem>>([]);
 
   useEffect(() => {
@@ -42,7 +42,6 @@ export default function MarsRover() {
     }
 
     setPhotoCount(count);
-    console.log(photoList);
     return photoList.reverse();
   }
 
