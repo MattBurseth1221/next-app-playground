@@ -124,7 +124,7 @@ export default function MarsRover() {
                   alt="Generated photo"
                   className="object-contain border-b-2 border-white"
                 />
-                <h1 className="p-6">"{photo.prompt}"</h1>
+                <h1 className="p-6">{photo.prompt}</h1>
               </div>
             );
           })}
