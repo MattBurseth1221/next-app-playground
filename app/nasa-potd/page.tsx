@@ -50,7 +50,7 @@ export default function NasaPotd() {
          : <div className="flex flex-col items-center p-5 text-center">
             {photoInfo.media_type === "video" ? <YoutubeEmbed embedId={photoInfo.url} />
             : <img src={photoInfo.hdurl} alt="Nasa Photo" className="w-[50vw] border-2 mb-5"/>}
-            <h1 className="my-5">'{photoInfo.title}' - {photoInfo.date}</h1>
+            <h1 className="my-5">{photoInfo.title} - {photoInfo.date}</h1>
             <p className="w-1/2">{photoInfo.explanation}</p>
           </div>}
       </div>

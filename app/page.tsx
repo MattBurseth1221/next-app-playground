@@ -1,4 +1,3 @@
-import { Main } from "next/document";
 import MainNav from "./ui/MainNav";
 import PageTitle from "./ui/PageTitle";
 import orionEarthImage from "./images/orion-and-earth.webp";
