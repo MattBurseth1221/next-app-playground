@@ -1,3 +1,5 @@
+export const runtime = 'edge';
+
 import { NextApiRequest } from "next";
 import { NextRequest, NextResponse } from "next/server";
 import OpenAI from "openai";
