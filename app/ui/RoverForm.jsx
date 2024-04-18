@@ -3,24 +3,19 @@
 import React, { useState } from 'react';
 
 export default function RoverForm() {
-  // State variables for form data
   const [selectedOption, setSelectedOption] = useState('');
   const [selectedDate, setSelectedDate] = useState('');
 
-  // Handle radio button change
   const handleOptionChange = (e) => {
     setSelectedOption(e.target.value);
   };
 
-  // Handle date change
   const handleDateChange = (e) => {
     setSelectedDate(e.target.value);
   };
 
-  // Form submission
   const handleSubmit = (e) => {
     e.preventDefault();
-    // Do something with the form data
     console.log('Selected Option:', selectedOption);
     console.log('Selected Date:', selectedDate);
   };

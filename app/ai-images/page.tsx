@@ -15,6 +15,7 @@ export default function MarsRover() {
   const [isLoading, setIsLoading] = useState<Boolean>(false);
   const [photoCount, setPhotoCount] = useState<number>(1);
   const [generatedPhotos, setGeneratedPhotos] = useState<Array<PhotoItem>>([]);
+  const [isLoggedIn, setIsLoggedIn] = useState<Boolean>(false);
 
   useEffect(() => {
     setGeneratedPhotos(getPreviousPhotos());
@@ -28,9 +29,7 @@ export default function MarsRover() {
       let key = sessionStorage.key(i);
 
       if (key!.includes("dall-e-3-photo-")) {
-        let photoJson = JSON.parse(
-          sessionStorage.getItem(key!)!
-        );
+        let photoJson = JSON.parse(sessionStorage.getItem(key!)!);
 
         photoList.push({
           prompt: photoJson.prompt,
@@ -88,7 +87,7 @@ export default function MarsRover() {
     setIsLoading(false);
   }
 
-  return (
+  return isLoggedIn ? (
     <main className="flex min-h-screen flex-col items-center justify-between p-12 relative">
       <MainNav active="AI Images" />
 
@@ -131,6 +130,13 @@ export default function MarsRover() {
           })}
         </div>
       )}
+    </main>
+  ) : (
+    <main className="flex min-h-screen flex-col items-center p-12 relative">
+      <MainNav active="AI Images" />
+
+      <PageTitle title="DALL-E Image Creation" />
+      <div className="text-center mt-[30vh]">Unavailable until user is logged in.</div>
     </main>
   );
 }
