@@ -87,7 +87,7 @@ export default function MarsRover() {
     setIsLoading(false);
   }
 
-  return true ? (
+  return isLoggedIn ? (
     <main className="flex min-h-screen flex-col items-center justify-between p-12 relative">
       <MainNav active="AI Images" />
 
@@ -107,7 +107,7 @@ export default function MarsRover() {
         </button>
       </div>
 
-      {true ? (
+      {isLoggedIn ? (
         <div>Loading photo...</div>
       ) : generatedPhotos.length === 0 ? (
         <div>No photos found.</div>
