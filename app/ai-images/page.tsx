@@ -107,7 +107,7 @@ export default function MarsRover() {
         </button>
       </div>
 
-      {isLoading ? (
+      {true ? (
         <div>Loading photo...</div>
       ) : generatedPhotos.length === 0 ? (
         <div>No photos found.</div>
